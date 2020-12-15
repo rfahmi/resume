@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, Dimensions, ScrollView, StatusBar} from 'react-native';
-import {Caption, IconButton} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Dimensions, ScrollView, StatusBar, Text, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {Caption} from 'react-native-paper';
+import BigTextGradient from '../../components/BigTextGradient';
 import Header from '../../components/Header';
+import SocialLinks from '../../components/SocialLinks';
 import Toggle from '../../components/Toggle';
 import {useTheme} from '../../utils/ThemeProvider';
 
@@ -10,7 +12,7 @@ const Home = () => {
   const {colors, isDark, setScheme} = useTheme();
   return (
     <>
-      <Header />
+      <Header title="Resume" />
       <StatusBar
         barStyle={isDark ? 'light-content' : 'dark-content'}
         backgroundColor={colors.background}
@@ -21,35 +23,8 @@ const Home = () => {
           backgroundColor: isDark ? '#111' : '#fff',
         }}>
         <View style={{flex: 1}}>
-          <View style={{width: Dimensions.get('window').width * 0.5}}>
-            <Text
-              style={{fontSize: 40, fontWeight: 'bold', color: colors.text}}>
-              FAHMI RIZALUL
-            </Text>
-          </View>
-          <Text style={{fontSize: 24, color: colors.text}}>
-            Front-End Developer
-          </Text>
-          <View style={{flexDirection: 'row'}}>
-            <IconButton
-              icon="github"
-              color={colors.text}
-              size={32}
-              onPress={() => console.log('click')}
-            />
-            <IconButton
-              icon="linkedin"
-              color={colors.text}
-              size={32}
-              onPress={() => console.log('click')}
-            />
-            <IconButton
-              icon="web"
-              color={colors.text}
-              size={32}
-              onPress={() => console.log('click')}
-            />
-          </View>
+          <BigTextGradient />
+          <SocialLinks />
         </View>
         <View
           style={{
@@ -67,10 +42,16 @@ const Home = () => {
             />
           </View>
         </View>
-        <View
+        <LinearGradient
+          start={{x: 0.0, y: 1.0}}
+          end={{x: 2.0, y: 0.0}}
+          colors={
+            isDark
+              ? [colors.secondary, colors.primaryLight]
+              : [colors.primary, colors.secondaryLight]
+          }
           style={{
             padding: 16,
-            backgroundColor: colors.primary,
             flex: 1,
             borderRadius: 16,
           }}>
@@ -112,7 +93,7 @@ const Home = () => {
             Just making mobile app, usually using Javascript Framework like
             React Native
           </Caption>
-        </View>
+        </LinearGradient>
         <View
           style={{
             flex: 1,

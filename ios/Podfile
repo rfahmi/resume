@@ -12,6 +12,10 @@ target 'MyResume' do
 
   pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
 
+  pod 'RNTextGradientView', :path => '../node_modules/react-native-text-gradient'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'MyResumeTests' do
     inherit! :complete
     # Pods for testing

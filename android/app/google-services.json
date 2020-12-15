@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "572854027072",
+    "firebase_url": "https://rfahmi-id.firebaseio.com",
+    "project_id": "rfahmi-id",
+    "storage_bucket": "rfahmi-id.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572854027072:android:0758bc39c594a68d0cb0a5",
+        "android_client_info": {
+          "package_name": "com.rfahmi.resume"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572854027072-8i8vpbm1jlg6hufsap9uuanb0ak796fu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt-hdguf3R8WgNA_DnC8AoavxI_Iq7SgI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "572854027072-8i8vpbm1jlg6hufsap9uuanb0ak796fu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

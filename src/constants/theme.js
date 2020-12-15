@@ -4,7 +4,12 @@ export const lightColors = {
   dim: '#eee',
   primary: '#1b1982',
   primaryLight: '#4A4AB1',
+  primaryDark: '#05066A',
+  secondary: '#66C7C2',
+  secondaryLight: '#75CDC8',
+  secondaryDark: '#5AAFAB',
   text: '#121212',
+  textSmooth: '#333333',
   error: '#D32F2F',
 };
 
@@ -12,8 +17,13 @@ export const lightColors = {
 export const darkColors = {
   background: '#121212',
   dim: '#000',
-  primary: '#4a4ab1',
+  primary: '#1b1982',
   primaryLight: '#4A4AB1',
+  primaryDark: '#05066A',
+  secondary: '#66C7C2',
+  secondaryLight: '#75CDC8',
+  secondaryDark: '#5AAFAB',
   text: '#FFFFFF',
+  textSmooth: '#aaaaaa',
   error: '#EF9A9A',
 };
