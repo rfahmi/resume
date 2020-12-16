@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Text} from 'react-native';
 import {LinearTextGradient} from 'react-native-text-gradient';
 import {useTheme} from '../utils/ThemeProvider';
@@ -26,4 +26,4 @@ const BigTextGradient = () => {
   );
 };
 
-export default BigTextGradient;
+export default memo(BigTextGradient);

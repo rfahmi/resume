@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {memo} from 'react';
 import {Appbar} from 'react-native-paper';
 import {useTheme} from '../utils/ThemeProvider';
 const Header = ({title}) => {
@@ -15,4 +15,4 @@ const Header = ({title}) => {
   );
 };
 
-export default Header;
+export default memo(Header);

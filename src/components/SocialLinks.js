@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Linking, View} from 'react-native';
 import {IconButton} from 'react-native-paper';
 import {useTheme} from '../utils/ThemeProvider';
@@ -28,4 +28,4 @@ const SocialLinks = () => {
   );
 };
 
-export default SocialLinks;
+export default memo(SocialLinks);

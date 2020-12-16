@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, memo} from 'react';
 import {Animated, TouchableWithoutFeedback, View} from 'react-native';
 import {useTheme} from '../utils/ThemeProvider';
 
@@ -107,4 +107,4 @@ const dynamicStyles = {
   }),
 };
 
-export default Toggle;
+export default memo(Toggle);

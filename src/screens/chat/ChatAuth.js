@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, memo} from 'react';
 import {ActivityIndicator, View, Text} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 import Header from '../../components/Header';
@@ -87,4 +87,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default memo(Auth);

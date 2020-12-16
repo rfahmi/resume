@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState, memo} from 'react';
 import {Text} from 'react-native';
 import {Bubble, GiftedChat, InputToolbar} from 'react-native-gifted-chat';
 import LinearGradient from 'react-native-linear-gradient';
@@ -116,4 +116,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default memo(Chat);

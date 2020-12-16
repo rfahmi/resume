@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Dimensions, ScrollView, StatusBar, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {Caption} from 'react-native-paper';
@@ -130,4 +130,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);
