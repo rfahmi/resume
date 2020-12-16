@@ -22,12 +22,17 @@ const Auth = () => {
         .where('_id', '==', fcm_token)
         .get()
         .then((snapshot) => {
-          snapshot.forEach(async (doc) => {
-            const data = doc.data();
-            console.log('User Found', data);
-            await AsyncStorage.setItem('user', JSON.stringify(data));
-          });
-          navigation.replace('Chat');
+          if (snapshot._docs.length === 1) {
+            snapshot.forEach(async (doc) => {
+              const data = doc.data();
+              console.log('User Found', data);
+              await AsyncStorage.setItem('user', JSON.stringify(data));
+            });
+            navigation.replace('Chat');
+          } else {
+            console.log('Snap False: ', snapshot);
+            setLoading(false);
+          }
         })
         .catch((err) => {
           setLoading(false);

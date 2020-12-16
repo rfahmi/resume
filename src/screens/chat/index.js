@@ -31,27 +31,29 @@ const Chat = () => {
   }, []);
 
   const appendMessages = useCallback((msg) => {
-    msg.forEach((doc) => {
-      const data = doc;
-      PushNotification.localNotification({
-        channelId: 'ch1',
-        title: data.user.name, // (optional)
-        message: data.text, // (required)
-      });
-      console.log('INI DATA: ', data.text);
-    });
-    console.log(msg);
+    // msg.forEach((doc) => {
+    //   const data = doc;
+    //   PushNotification.localNotification({
+    //     channelId: 'ch1',
+    //     title: data.user.name, // (optional)
+    //     message: data.text, // (required)
+    //   });
+    //   console.log('INI DATA: ', data.text);
+    // });
+    // console.log(msg);
     setMessages((previousMessages) => GiftedChat.append(previousMessages, msg));
   }, []);
 
   const readUser = async () => {
     const u = await AsyncStorage.getItem('user');
+    console.log('u', u);
     if (u) {
       setUser(JSON.parse(u));
     }
   };
 
   const handleSend = async (msg) => {
+    console.log('message sent:', msg);
     const writes = msg.map((m) => messagesRef.add(m));
     await Promise.all(writes);
   };
