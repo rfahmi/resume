@@ -12,8 +12,8 @@ const BigTextGradient = () => {
         locations={[0, 1]}
         colors={
           isDark
-            ? [colors.secondary, colors.primaryLight]
-            : [colors.primary, colors.secondaryLight]
+            ? [colors.primaryLight, colors.secondaryLight]
+            : [colors.primary, colors.secondary]
         }
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}>

@@ -22,7 +22,7 @@ const Home = () => {
           paddingHorizontal: 16,
           backgroundColor: isDark ? '#111' : '#fff',
         }}>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, marginTop: 16}}>
           <BigTextGradient />
           <SocialLinks />
         </View>
@@ -30,7 +30,7 @@ const Home = () => {
           style={{
             flex: 1,
             justifyContent: 'center',
-            height: 250,
+            height: 300,
             alignItems: 'center',
           }}>
           <View style={{width: Dimensions.get('window').width / 3}}>
@@ -47,8 +47,8 @@ const Home = () => {
           end={{x: 2.0, y: 0.0}}
           colors={
             isDark
-              ? [colors.secondary, colors.primaryLight]
-              : [colors.primary, colors.secondaryLight]
+              ? [colors.primaryLight, colors.secondaryLight]
+              : [colors.primary, colors.secondary]
           }
           style={{
             padding: 16,
@@ -61,11 +61,33 @@ const Home = () => {
               fontSize: 24,
               fontWeight: 'bold',
             }}>
-            What Can I do?
+            About Me
           </Text>
           <Caption style={{color: colors.background}}>
-            Just making mobile app, usually using Javascript Framework like
-            React Native
+            Professionally connected with the development industry and
+            information technology for almost 5 years.{'\n'}
+            Well-organised person, problem solver, independent employee with
+            high attention to detail. Fan of anime and other japanese stuff
+            hobbies.{'\n'}Interested in the entire frontend spectrum and working
+            on ambitious projects with positive people.
+          </Caption>
+          <View style={{height: 22}} />
+          <Text
+            style={{
+              color: colors.background,
+              fontSize: 24,
+              fontWeight: 'bold',
+            }}>
+            What Can I Do?
+          </Text>
+          <Caption style={{color: colors.background}}>
+            The main area of my expertise is front end development (Mobile App)
+            especially React.{'\n'}I have also full-stack developer experience
+            with PHP with Laravel, Codeigniter, and sometimes use Firebase for
+            serverless project like this app.
+            {'\n'}Visit my Linkedin profile for more details or feel free to use
+            live chat feature of this app to directly connected to me in a
+            second.
           </Caption>
           <View style={{height: 22}} />
           <Text
@@ -77,8 +99,8 @@ const Home = () => {
             Experiences
           </Text>
           <Caption style={{color: colors.background}}>
-            Just making mobile app, usually using Javascript Framework like
-            React Native
+            I've started my IT Career since 2016, started working as IT Support
+            before go to university
           </Caption>
           <View style={{height: 22}} />
           <Text
@@ -90,8 +112,7 @@ const Home = () => {
             Portfolios
           </Text>
           <Caption style={{color: colors.background}}>
-            Just making mobile app, usually using Javascript Framework like
-            React Native
+            Coming soon! I will drop some awesome project here later
           </Caption>
         </LinearGradient>
         <View
@@ -102,9 +123,7 @@ const Home = () => {
             paddingVertical: 32,
             paddingHorizontal: 24,
           }}>
-          <Text style={{color: colors.text}}>
-            Yes, that's not so much about me
-          </Text>
+          <Text style={{color: colors.text}}>That's all</Text>
         </View>
       </ScrollView>
     </>

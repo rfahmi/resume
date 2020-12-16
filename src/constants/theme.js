@@ -2,6 +2,7 @@
 export const lightColors = {
   background: '#FFFFFF',
   dim: '#eee',
+  white: '#FFFFFF',
   primary: '#1b1982',
   primaryLight: '#4A4AB1',
   primaryDark: '#05066A',
@@ -17,6 +18,7 @@ export const lightColors = {
 export const darkColors = {
   background: '#121212',
   dim: '#000',
+  white: '#FFFFFF',
   primary: '#1b1982',
   primaryLight: '#4A4AB1',
   primaryDark: '#05066A',

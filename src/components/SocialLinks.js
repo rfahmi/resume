@@ -10,19 +10,19 @@ const SocialLinks = () => {
         icon="github"
         color={colors.textSmooth}
         size={32}
-        onPress={() => Linking.openURL('https://google.com')}
+        onPress={() => Linking.openURL('https://github.com/rfahmi')}
       />
       <IconButton
         icon="linkedin"
         color={colors.textSmooth}
         size={32}
-        onPress={() => console.log('click')}
+        onPress={() => Linking.openURL('https://linkedin.com/rfahmi')}
       />
       <IconButton
         icon="web"
         color={colors.textSmooth}
         size={32}
-        onPress={() => console.log('click')}
+        onPress={() => Linking.openURL('https://rfahmi.com')}
       />
     </View>
   );

@@ -1,16 +1,25 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
-import Home from './home';
-import Chat from './chat';
 import {useTheme} from '../../../utils/ThemeProvider';
+import Chat from './chat';
+import Home from './home';
 
 const Drawer = createDrawerNavigator();
 
 const AppStack = () => {
   const {colors} = useTheme();
+
   return (
     <Drawer.Navigator
       initialRouteName="Home"
+      drawerContentOptions={{
+        activeTintColor: colors.background,
+        activeBackgroundColor: colors.primaryLight,
+        inactiveTintColor: colors.textSmooth,
+        labelStyle: {
+          marginLeft: 5,
+        },
+      }}
       drawerStyle={{backgroundColor: colors.background}}>
       <Drawer.Screen name="Resume" component={Home} />
       <Drawer.Screen name="Chat With Me" component={Chat} />
