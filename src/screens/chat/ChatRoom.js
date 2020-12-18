@@ -5,28 +5,32 @@ import {Text} from 'react-native';
 import {Bubble, GiftedChat, InputToolbar} from 'react-native-gifted-chat';
 import LinearGradient from 'react-native-linear-gradient';
 import PushNotification from 'react-native-push-notification';
-import Header from '../../components/Header';
+import HeaderBack from '../../components/HeaderBack';
 import {useTheme} from '../../utils/ThemeProvider';
 const messagesRef = firestore().collection('messages');
+const roomRef = firestore().collection('rooms');
 
-const Chat = () => {
+const Chat = ({route, navigation}) => {
+  const {_id} = route.params;
   const {colors} = useTheme();
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     readUser();
-    const unsubscribe = messagesRef.onSnapshot((querySnapshot) => {
-      const messagesFirestore = querySnapshot
-        .docChanges()
-        .filter(({type}) => type === 'added')
-        .map(({doc}) => {
-          const message = doc.data();
-          return {...message, createdAt: message.createdAt.toDate()};
-        })
-        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-      appendMessages(messagesFirestore);
-    });
+    const unsubscribe = messagesRef
+      .where('room', '==', _id)
+      .onSnapshot((querySnapshot) => {
+        const messagesFirestore = querySnapshot
+          .docChanges()
+          .filter(({type}) => type === 'added')
+          .map(({doc}) => {
+            const message = doc.data();
+            return {...message, createdAt: message.createdAt.toDate()};
+          })
+          .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+        appendMessages(messagesFirestore);
+      });
     return () => unsubscribe();
   }, []);
 
@@ -52,15 +56,17 @@ const Chat = () => {
     }
   };
 
-  const handleSend = async (msg) => {
-    console.log('message sent:', msg);
-    const writes = msg.map((m) => messagesRef.add(m));
+  const handleSend = async (e) => {
+    const writes = e.map((m) => {
+      const new_m = {...m, room: _id};
+      messagesRef.add(new_m);
+    });
     await Promise.all(writes);
   };
 
   return (
     <>
-      <Header title="Chat With Me" />
+      <HeaderBack title="Chat With Me" />
       <LinearGradient
         start={{x: 0.0, y: 1.0}}
         end={{x: 2.0, y: 0.0}}
