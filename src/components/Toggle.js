@@ -43,7 +43,7 @@ const Toggle = ({
                 {
                   translateX: animation.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [0, containerWidth - 50],
+                    outputRange: [0, containerWidth - 40],
                   }),
                 },
               ],
@@ -52,7 +52,7 @@ const Toggle = ({
           <View
             style={{
               backgroundColor: colors.background,
-              height: 42,
+              height: 32,
               justifyContent: 'center',
               alignItems: 'center',
               padding: 8,
@@ -84,7 +84,7 @@ const dynamicStyles = {
       outputRange: [colors.dim, colors.dim],
     }),
     borderRadius: 25,
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     paddingHorizontal: 57,
   }),
