@@ -61,7 +61,7 @@ const Chat = ({route, navigation}) => {
   const deleteChat = () => {
     setMenu(false);
     chatsRef.doc(chat._id).delete();
-    navigation.navigate('Resume');
+    navigation.goBack();
   };
 
   return (
@@ -69,18 +69,20 @@ const Chat = ({route, navigation}) => {
       <HeaderBack
         title="Chat With Me"
         right={
-          <Menu
-            visible={menu}
-            onDismiss={() => setMenu(false)}
-            anchor={
-              <Appbar.Action
-                icon="dots-vertical"
-                onPress={() => setMenu(true)}
-                color={colors.text}
-              />
-            }>
-            <Menu.Item onPress={deleteChat} title="Delete Account" />
-          </Menu>
+          host && (
+            <Menu
+              visible={menu}
+              onDismiss={() => setMenu(false)}
+              anchor={
+                <Appbar.Action
+                  icon="dots-vertical"
+                  onPress={() => setMenu(true)}
+                  color={colors.text}
+                />
+              }>
+              <Menu.Item onPress={deleteChat} title="Delete Chat" />
+            </Menu>
+          )
         }
       />
       {!host && (
