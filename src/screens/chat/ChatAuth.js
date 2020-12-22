@@ -1,67 +1,32 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState, memo} from 'react';
-import {ActivityIndicator, View, Text} from 'react-native';
+import React, {memo, useEffect, useState} from 'react';
+import {ActivityIndicator, Dimensions, Text, View} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 import Header from '../../components/Header';
 import {uniqueID} from '../../utils/Generator';
 import {useTheme} from '../../utils/ThemeProvider';
 
-const visitorsRef = firestore().collection('visitors');
-const roomsRef = firestore().collection('rooms');
+const chatsRef = firestore().collection('chats');
 
 const Auth = () => {
   const {colors} = useTheme();
   const navigation = useNavigation();
-  const [host, setHost] = useState(null);
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getHost = async () => {
-      visitorsRef
-        .where('master', '==', true)
-        .get()
-        .then((snapshot) => {
-          if (snapshot._docs.length === 1) {
-            snapshot.forEach(async (doc) => {
-              const data = doc.data();
-              console.log('Host Found', data);
-              setHost(data);
-              await AsyncStorage.setItem(
-                'fcm_token_host',
-                JSON.stringify(data._id),
-              );
-            });
-          } else {
-            console.log('Host False: ', snapshot);
-            navigation.replace('App');
-          }
-        })
-        .catch((err) => {
-          console.log('Error getting documents', err);
-        });
-    };
-
     const checkUser = async () => {
       const fcm_token = await AsyncStorage.getItem('fcm_token');
-      visitorsRef
-        .where('_id', '==', fcm_token)
+      chatsRef
+        .doc(fcm_token)
         .get()
         .then((snapshot) => {
-          if (snapshot._docs.length === 1) {
-            snapshot.forEach(async (doc) => {
-              const data = doc.data();
-              console.log('User Found', data);
-              await AsyncStorage.setItem('user', JSON.stringify(data));
-              navigation.replace('ChatList', {
-                owner: fcm_token,
-                master: data.master,
-              });
-            });
+          const data = snapshot.data();
+          if (data) {
+            navigation.replace('ChatRoom', {chat: data, host: false});
           } else {
-            console.log('Snap False: ', snapshot);
             setLoading(false);
           }
         })
@@ -70,39 +35,30 @@ const Auth = () => {
           console.log('Error getting documents', err);
         });
     };
-    getHost();
     checkUser();
   }, [navigation]);
 
-  const handlePress = async () => {
-    //DATA VISITOR
-    const _id = await AsyncStorage.getItem('fcm_token');
-    const master = false;
-    const visitor = {_id, name, master};
-    // CREATE VISITOR
-    const addVisitor = visitorsRef.add(visitor);
-    await Promise.all(addVisitor);
-
-    //DATA ROOM
-
-    const room = {
-      _id: uniqueID(),
-      room_name: host.name,
-      owner: _id,
-      recepient: host._id,
-      last_message: '(start chatting)',
+  const handleStart = async () => {
+    const fcm_token = await AsyncStorage.getItem('fcm_token');
+    const user = {
+      _id: fcm_token,
+      name: name,
     };
-
-    //CREATE FIRST ROOM
-    const addRoom = roomsRef.add(room);
-    await Promise.all(addRoom);
-
-    //LOCAL DATA
-    await AsyncStorage.setItem('user', JSON.stringify(visitor));
-
-    //NAVIGATE
-    // navigation.replace('ChatRoom', {room: _id});
-    navigation.replace('ChatList', {owner: _id, master: master});
+    chatsRef.doc(fcm_token).set(user);
+    chatsRef
+      .doc(fcm_token)
+      .collection('messages')
+      .add({
+        _id: uniqueID(),
+        text:
+          'Hi there, please tell me how I can help you today. I will connect in a second',
+        createdAt: new Date(),
+        user: {
+          _id: 1,
+          name: 'Fahmi Rizalul',
+        },
+      });
+    navigation.replace('ChatRoom', {chat: user, host: false});
   };
 
   return (
@@ -135,26 +91,41 @@ const Auth = () => {
               // flexDirection: 'row',
               justifyContent: 'center',
             }}>
+            <Text
+              style={{
+                color: colors.text,
+                fontSize: 32,
+                fontWeight: 'bold',
+                marginBottom: 16,
+                width: Dimensions.get('window').width * 0.7,
+              }}>
+              Let me know who you are?
+            </Text>
             <View>
               <TextInput
-                mode="outlined"
+                mode="flat"
                 style={{
-                  backgroundColor: colors.background,
-                  height: 50,
                   marginVertical: 16,
-                  color: colors.text,
                 }}
-                placeholderTextColor={colors.text}
-                placeholder="Your name..."
+                theme={{
+                  colors: {
+                    placeholder: colors.text,
+                    text: colors.text,
+                    primary: colors.text,
+                    underlineColor: 'transparent',
+                    background: colors.background,
+                  },
+                }}
                 contentStyle={{color: colors.text}}
-                label="Who are you?"
+                label="Your name..."
                 value={name}
                 onChangeText={setName}
               />
               <Button
+                disabled={!name}
                 mode="contained"
                 contentStyle={{height: 50}}
-                onPress={handlePress}>
+                onPress={handleStart}>
                 START CHAT
               </Button>
             </View>

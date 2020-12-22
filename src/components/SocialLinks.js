@@ -24,6 +24,12 @@ const SocialLinks = () => {
         size={32}
         onPress={() => Linking.openURL('https://rfahmi.com')}
       />
+      <IconButton
+        icon="email"
+        color={colors.textSmooth}
+        size={32}
+        onPress={() => Linking.openURL('mailto:rfahmi@outlook.com')}
+      />
     </View>
   );
 };

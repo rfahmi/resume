@@ -9,13 +9,13 @@ const ResumeAboutMe = () => {
     <View>
       <Text
         style={{
-          color: colors.background,
+          color: colors.white,
           fontSize: 24,
           fontWeight: 'bold',
         }}>
         About Me
       </Text>
-      <Caption style={{color: colors.background}}>
+      <Caption style={{color: colors.white}}>
         Professionally connected with the development industry and information
         technology for almost 5 years.{'\n'}
         Well-organized person, problem solver, independent employee with high

@@ -1,25 +1,28 @@
-import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import React, {useCallback, useEffect, useState, memo} from 'react';
 import {Text} from 'react-native';
 import {Bubble, GiftedChat, InputToolbar} from 'react-native-gifted-chat';
 import LinearGradient from 'react-native-linear-gradient';
+import {Appbar, Menu} from 'react-native-paper';
 import PushNotification from 'react-native-push-notification';
 import HeaderBack from '../../components/HeaderBack';
 import {useTheme} from '../../utils/ThemeProvider';
-const messagesRef = firestore().collection('messages');
-const roomRef = firestore().collection('rooms');
+const chatsRef = firestore().collection('chats');
 
 const Chat = ({route, navigation}) => {
-  const {_id} = route.params;
+  const {chat, host} = route.params;
   const {colors} = useTheme();
-  const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [menu, setMenu] = useState(false);
+  const hostUser = {
+    _id: 1,
+    name: 'Fahmi Rizalul',
+  };
 
   useEffect(() => {
-    readUser();
-    const unsubscribe = messagesRef
-      .where('room', '==', _id)
+    const unsubscribe = chatsRef
+      .doc(chat._id)
+      .collection('messages')
       .onSnapshot((querySnapshot) => {
         const messagesFirestore = querySnapshot
           .docChanges()
@@ -48,39 +51,55 @@ const Chat = ({route, navigation}) => {
     setMessages((previousMessages) => GiftedChat.append(previousMessages, msg));
   }, []);
 
-  const readUser = async () => {
-    const u = await AsyncStorage.getItem('user');
-    console.log('u', u);
-    if (u) {
-      setUser(JSON.parse(u));
-    }
-  };
-
   const handleSend = async (e) => {
     const writes = e.map((m) => {
-      const new_m = {...m, room: _id};
-      messagesRef.add(new_m);
+      chatsRef.doc(chat._id).collection('messages').add(m);
     });
     await Promise.all(writes);
   };
 
+  const deleteChat = () => {
+    setMenu(false);
+    chatsRef.doc(chat._id).delete();
+    navigation.navigate('Resume');
+  };
+
   return (
     <>
-      <HeaderBack title="Chat With Me" />
-      <LinearGradient
-        start={{x: 0.0, y: 1.0}}
-        end={{x: 2.0, y: 0.0}}
-        colors={[colors.primaryLight, colors.primaryDark]}
-        style={{alignItems: 'center'}}>
-        <Text style={{color: '#fff', fontSize: 10, fontWeight: 'bold'}}>
-          Direct Connected with Fahmi Rizalul
-        </Text>
-      </LinearGradient>
+      <HeaderBack
+        title="Chat With Me"
+        right={
+          <Menu
+            visible={menu}
+            onDismiss={() => setMenu(false)}
+            anchor={
+              <Appbar.Action
+                icon="dots-vertical"
+                onPress={() => setMenu(true)}
+                color={colors.text}
+              />
+            }>
+            <Menu.Item onPress={deleteChat} title="Delete Account" />
+          </Menu>
+        }
+      />
+      {!host && (
+        <LinearGradient
+          start={{x: 0.0, y: 1.0}}
+          end={{x: 2.0, y: 0.0}}
+          colors={[colors.primaryLight, colors.primaryDark]}
+          style={{alignItems: 'center'}}>
+          <Text style={{color: '#fff', fontSize: 10, fontWeight: 'bold'}}>
+            Direct Connected with Fahmi Rizalul
+          </Text>
+        </LinearGradient>
+      )}
       <GiftedChat
         messages={messages}
-        user={user}
+        user={host ? hostUser : chat}
         onSend={handleSend}
         showUserAvatar
+        renderUsernameOnMessage
         messagesContainerStyle={{backgroundColor: colors.background}}
         textInputStyle={{
           backgroundColor: colors.dim,

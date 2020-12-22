@@ -1,6 +1,7 @@
 import React, {memo, useRef} from 'react';
 import {Animated, Dimensions, StatusBar, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from '../../components/Header';
 import Toggle from '../../components/Toggle';
@@ -11,7 +12,7 @@ import ResumePortfolios from '../../organism/resume/ResumePortfolios';
 import ResumeSkills from '../../organism/resume/ResumeSkills';
 import {useTheme} from '../../utils/ThemeProvider';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const {colors, isDark, setScheme} = useTheme();
   const scroll = useRef(new Animated.Value(0)).current;
   const panels = [
@@ -58,12 +59,14 @@ const Home = () => {
       <Header
         title="Resume"
         right={
-          <Toggle
-            onPress={() => setScheme(isDark ? 'light' : 'dark')}
-            initialState={!isDark}
-            onText="Day"
-            offText="Night"
-          />
+          <View style={{flex: 0.6, marginRight: 16}}>
+            <Toggle
+              onPress={() => setScheme(isDark ? 'light' : 'dark')}
+              initialState={!isDark}
+              onText="Day"
+              offText="Night"
+            />
+          </View>
         }
       />
       <StatusBar
@@ -72,12 +75,12 @@ const Home = () => {
       />
       <ResumeHeadline
         opacity={scroll.interpolate({
-          inputRange: [0, 300],
+          inputRange: [0, 400],
           outputRange: [1, 0],
         })}
         translateY={scroll.interpolate({
           inputRange: [0, 100],
-          outputRange: [0, -3],
+          outputRange: [0, -10],
         })}
       />
       <Animated.FlatList
@@ -86,6 +89,7 @@ const Home = () => {
         }}
         style={{
           paddingHorizontal: 16,
+          zIndex: 0,
         }}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: scroll}}}],

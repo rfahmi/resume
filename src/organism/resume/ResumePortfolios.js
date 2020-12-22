@@ -9,13 +9,13 @@ const ResumePortfolios = () => {
     <View>
       <Text
         style={{
-          color: colors.background,
+          color: colors.white,
           fontSize: 24,
           fontWeight: 'bold',
         }}>
         Portfolios
       </Text>
-      <Caption style={{color: colors.background}}>
+      <Caption style={{color: colors.white}}>
         Coming soon! I will drop some awesome project here later
       </Caption>
     </View>

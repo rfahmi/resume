@@ -28,14 +28,16 @@ const ExperienceTimeline = () => {
         data={data}
         showTime
         separator
-        timeStyle={{color: colors.background}}
+        timeStyle={{color: colors.white}}
         timeContainerStyle={{minWidth: 55}}
-        titleStyle={{color: colors.background}}
-        descriptionStyle={{color: colors.background}}
-        lineColor={colors.background}
-        // eventContainerStyle={{backgroundColor: 'red', margin: 0}}
-        // detailContainerStyle={{backgroundColor: 'yellow', padding: 0}}
-        circleColor={colors.background}
+        titleStyle={{color: colors.white}}
+        descriptionStyle={{color: colors.white}}
+        lineColor={colors.white}
+        separatorStyle={{
+          backgroundColor: colors.white,
+          height: 0.5,
+        }}
+        circleColor={colors.white}
       />
     </View>
   );

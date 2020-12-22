@@ -1,18 +1,28 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {memo} from 'react';
-import {View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {useTheme} from '../utils/ThemeProvider';
-const Header = ({title, right}) => {
+const Header = ({title, right, transparent}) => {
   const navigation = useNavigation();
   const {colors} = useTheme();
   const _openDrawer = () => navigation.openDrawer();
 
   return (
-    <Appbar.Header style={{backgroundColor: colors.background, elevation: 0}}>
-      <Appbar.Action icon="menu" onPress={_openDrawer} />
-      <Appbar.Content title={title} />
-      <View style={{flex: 0.6, marginRight: 16}}>{right}</View>
+    <Appbar.Header
+      style={{
+        backgroundColor: transparent ? 'transparent' : colors.background,
+        elevation: 0,
+      }}>
+      <Appbar.Action
+        icon="menu"
+        onPress={_openDrawer}
+        color={transparent ? 'white' : colors.text}
+      />
+      <Appbar.Content
+        title={title}
+        color={transparent ? 'white' : colors.text}
+      />
+      {right}
     </Appbar.Header>
   );
 };

@@ -11,7 +11,8 @@ export const lightColors = {
   secondaryDark: '#5AAFAB',
   text: '#121212',
   textSmooth: '#333333',
-  error: '#D32F2F',
+  danger: '#FF1744',
+  dangerDark: '#c4001d',
 };
 
 // Dark theme colors
@@ -27,5 +28,6 @@ export const darkColors = {
   secondaryDark: '#5AAFAB',
   text: '#FFFFFF',
   textSmooth: '#aaaaaa',
-  error: '#EF9A9A',
+  danger: '#FF1744',
+  dangerDark: '#c4001d',
 };

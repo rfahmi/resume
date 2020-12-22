@@ -1,4 +1,6 @@
 rootProject.name = 'MyResume'
+include ':@react-native-community_google-signin'
+project(':@react-native-community_google-signin').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/google-signin/android')
 include ':react-native-linear-gradient'
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
 include ':react-native-text-gradient'

@@ -10,13 +10,13 @@ const ResumeExperiences = () => {
     <View>
       <Text
         style={{
-          color: colors.background,
+          color: colors.white,
           fontSize: 24,
           fontWeight: 'bold',
         }}>
         Experiences
       </Text>
-      <Caption style={{color: colors.background}}>
+      <Caption style={{color: colors.white}}>
         I've started my IT Career since 2016, started working as IT Support
         before go to university
       </Caption>
