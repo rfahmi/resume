@@ -20,7 +20,7 @@ const BigTextGradient = () => {
         <Text>FAHMI RIZALUL</Text>
       </LinearTextGradient>
       <Text style={{fontSize: 24, color: colors.textSmooth}}>
-        Front-End Developer
+        Front-End Engineer
       </Text>
     </>
   );

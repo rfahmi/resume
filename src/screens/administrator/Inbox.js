@@ -27,15 +27,8 @@ const Inbox = ({navigation}) => {
 
   // Handle user state changes
   function onAuthStateChanged(u) {
-    if (u.email === 'mn.imhafr@gmail.com') {
+    if (u && u.email === 'mn.imhafr@gmail.com') {
       setUser(u);
-      RNToasty.Success({
-        title: 'Welcome Back ' + u.displayName,
-      });
-    } else {
-      RNToasty.Error({
-        title: "Oopps! your account don't have access",
-      });
     }
     if (initializing) {
       setInitializing(false);
@@ -140,7 +133,10 @@ const Inbox = ({navigation}) => {
               <>
                 <List.Item
                   onPress={() =>
-                    navigation.navigate('ChatRoom', {chat: item, host: true})
+                    navigation.push('AdministratorChatRoom', {
+                      chat: item,
+                      host: true,
+                    })
                   }
                   style={{backgroundColor: colors.background}}
                   titleStyle={{color: colors.text}}
