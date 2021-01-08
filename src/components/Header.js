@@ -12,6 +12,7 @@ const Header = ({title, right, transparent}) => {
       style={{
         backgroundColor: transparent ? 'transparent' : colors.background,
         elevation: 0,
+        zIndex: 2,
       }}>
       <Appbar.Action
         icon="menu"

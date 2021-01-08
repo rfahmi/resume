@@ -8,7 +8,8 @@ const Header = ({title, right}) => {
   const _goBack = () => navigation.goBack();
 
   return (
-    <Appbar.Header style={{backgroundColor: colors.background, elevation: 0}}>
+    <Appbar.Header
+      style={{backgroundColor: colors.background, elevation: 0, zIndex: 2}}>
       <Appbar.BackAction onPress={_goBack} />
       <Appbar.Content title={title} />
       {right}

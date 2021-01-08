@@ -67,7 +67,7 @@ const Chat = ({route, navigation}) => {
   return (
     <>
       <HeaderBack
-        title="Chat With Me"
+        title="Live Chat"
         right={
           host && (
             <Menu

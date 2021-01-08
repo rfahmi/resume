@@ -6085,6 +6085,11 @@ react-native-toasty@^1.0.2:
   dependencies:
     react-native-vector-icons "6.6.0"
 
+react-native-touch-through-view@^1.2.0-beta.1:
+  version "1.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react-native-touch-through-view/-/react-native-touch-through-view-1.2.0-beta.1.tgz#b4dfc8f7ae667eb9da61b947e7d3c8db856f0fc8"
+  integrity sha512-phvpFU8w4xHe4Pdi/S2o+3BuR3NxEnAUdKHcraMC9o7o6G7SxyaotRsqVjkx1hD2+U6hLY7c1N0n/cgYyf8D9A==
+
 react-native-typing-animation@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/react-native-typing-animation/-/react-native-typing-animation-0.1.7.tgz#8f2cf08d9400ae543a110292eb7d71523dda5528"

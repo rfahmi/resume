@@ -1,9 +1,11 @@
 import React, {memo} from 'react';
-import {Text} from 'react-native';
+import {Text, TouchableWithoutFeedback} from 'react-native';
 import {LinearTextGradient} from 'react-native-text-gradient';
 import {useTheme} from '../utils/ThemeProvider';
+import {useNavigation} from '@react-navigation/native';
 
 const BigTextGradient = () => {
+  const navigation = useNavigation();
   const {colors, isDark} = useTheme();
   return (
     <>
@@ -17,7 +19,10 @@ const BigTextGradient = () => {
         }
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}>
-        <Text>FAHMI RIZALUL</Text>
+        <TouchableWithoutFeedback
+          onLongPress={() => navigation.navigate('Administrator')}>
+          <Text>FAHMI RIZALUL</Text>
+        </TouchableWithoutFeedback>
       </LinearTextGradient>
       <Text style={{fontSize: 24, color: colors.textSmooth}}>
         Front-End Engineer

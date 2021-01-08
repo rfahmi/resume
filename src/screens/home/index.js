@@ -1,7 +1,10 @@
 import React, {memo, useRef} from 'react';
 import {Animated, Dimensions, StatusBar, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {Button} from 'react-native-paper';
+import {
+  TouchThroughView,
+  TouchThroughWrapper,
+} from 'react-native-touch-through-view';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from '../../components/Header';
 import Toggle from '../../components/Toggle';
@@ -83,50 +86,56 @@ const Home = ({navigation}) => {
           outputRange: [0, -10],
         })}
       />
-      <Animated.FlatList
-        contentContainerStyle={{
-          paddingTop: Dimensions.get('window').height * 0.4,
-        }}
-        style={{
-          paddingHorizontal: 16,
-          zIndex: 0,
-        }}
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scroll}}}],
-          {useNativeDriver: true},
-        )}
-        scrollEventThrottle={16}
-        data={panels}
-        renderItem={_renderPanel}
-        keyExtractor={keyExtractor}
-        ListHeaderComponent={() => (
-          <Animated.View
-            style={{
-              alignItems: 'center',
-              opacity: scroll.interpolate({
-                inputRange: [0, 100],
-                outputRange: [1, 0],
-              }),
-            }}>
-            <Icon name="chevron-up" size={36} color={colors.textSmooth} />
-          </Animated.View>
-        )}
-        ListFooterComponent={() => (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingVertical: 32,
-              paddingHorizontal: 24,
-            }}>
-            <Text style={{color: colors.text}}>That's all</Text>
-          </View>
-        )}
-        removeClippedSubviews
-        initialNumToRender={1}
-        maxToRenderPerBatch={1}
-      />
+      <TouchThroughWrapper>
+        <Animated.FlatList
+          style={{
+            paddingHorizontal: 16,
+            marginBottom: 24,
+          }}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {y: scroll}}}],
+            {useNativeDriver: true},
+          )}
+          scrollEventThrottle={16}
+          data={panels}
+          renderItem={_renderPanel}
+          keyExtractor={keyExtractor}
+          ListHeaderComponent={() => (
+            <>
+              <TouchThroughView
+                style={{
+                  height: Dimensions.get('window').height * 0.4,
+                }}
+              />
+              <Animated.View
+                style={{
+                  alignItems: 'center',
+                  opacity: scroll.interpolate({
+                    inputRange: [0, 100],
+                    outputRange: [1, 0],
+                  }),
+                }}>
+                <Icon name="chevron-up" size={36} color={colors.textSmooth} />
+              </Animated.View>
+            </>
+          )}
+          ListFooterComponent={() => (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingVertical: 32,
+                paddingHorizontal: 24,
+              }}>
+              <Text style={{color: colors.text}}>That's all</Text>
+            </View>
+          )}
+          removeClippedSubviews
+          initialNumToRender={1}
+          maxToRenderPerBatch={1}
+        />
+      </TouchThroughWrapper>
     </View>
   );
 };
