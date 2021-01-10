@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'MyResume' do
+target 'rfahmi' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
@@ -18,7 +18,7 @@ target 'MyResume' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
 
-  target 'MyResumeTests' do
+  target 'rfahmiTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -33,10 +33,10 @@ target 'MyResume' do
   end
 end
 
-target 'MyResume-tvOS' do
-  # Pods for MyResume-tvOS
+target 'rfahmi-tvOS' do
+  # Pods for rfahmi-tvOS
 
-  target 'MyResume-tvOSTests' do
+  target 'rfahmi-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

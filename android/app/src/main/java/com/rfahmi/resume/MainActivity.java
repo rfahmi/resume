@@ -13,7 +13,7 @@ public class MainActivity extends ReactActivity implements TouchThroughTouchHand
    */
   @Override
   protected String getMainComponentName() {
-    return "MyResume";
+    return "rfahmi";
   }
 
   public TouchThroughTouchHandler getTouchThroughTouchHandler() {
