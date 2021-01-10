@@ -5,6 +5,9 @@ import {useTheme} from '../../utils/ThemeProvider';
 
 const ResumeAboutMe = () => {
   const {colors} = useTheme();
+  const date = new Date();
+  const current_year = date.getFullYear();
+  const age = current_year - 2016;
   return (
     <View>
       <Text
@@ -17,7 +20,7 @@ const ResumeAboutMe = () => {
       </Text>
       <Caption style={{color: colors.white}}>
         Professionally connected with the development industry and information
-        technology for almost 5 years.{'\n'}
+        technology for about {age} years.{'\n'}
         Well-organized person, problem solver, independent employee with high
         attention to detail. Fan of anime and other japanese stuff hobbies.
         {'\n'}Interested in the entire frontend spectrum and working on

@@ -12,35 +12,42 @@ const ResumePortfolios = () => {
   const projects = [
     {
       id: 1,
-      pic: require('../../assets/projects/empty.png'),
+      pic: require('../../assets/projects/1.jpg'),
       name: 'Harnic Online Store',
       caption: 'Online shopping & groceries app',
-      desc: 'blah blablbah blah blablbah blah blablbah blah blablbah ',
-      techs: ['React Native', 'PHP', 'Ionic', 'MySQL'],
+      desc:
+        'An online shopping app built using React Native. Has standard e-commerce application functions such as product information, add to carts, purchases and also payment gateway support for automatic transaction verification',
+      credit: 'PT. Harnic Online Store',
+      techs: ['React Native', 'Laravel', 'Ionic', 'MySQL'],
     },
-    {
-      id: 2,
-      pic: require('../../assets/projects/empty.png'),
-      name: 'Harnic Courier',
-      caption: 'Delivery courier app',
-      desc: 'blah blablbah blah blablbah blah blablbah blah blablbah ',
-      techs: ['React Native', 'PHP', 'Ionic', 'MySQL'],
-    },
+    // {
+    //   id: 2,
+    //   pic: require('../../assets/projects/empty.png'),
+    //   name: 'Harnic Courier',
+    //   caption: 'Delivery courier app',
+    //   desc: 'Information unavailable right now',
+    //   credit: 'PT. Harnic Online Store',
+    //   techs: ['React Native', 'Laravel', 'Ionic', 'MySQL'],
+    // },
     {
       id: 3,
-      pic: require('../../assets/projects/empty.png'),
+      pic: require('../../assets/projects/2.jpg'),
       name: 'ReSH Smart Home',
       caption: 'Smart apartment integrated with Tuya Platform',
-      desc: 'blah blablbah blah blablbah blah blablbah blah blablbah ',
-      techs: ['React Native', 'PHP', 'Ionic', 'MySQL'],
+      desc:
+        'App for apartment residents with news features, panic buttons, bill info, and facility booking. Integrated with payment gateways and Tuya Cloud Platform to control smart devices',
+      credit: 'PT. Eskanusa Putraco',
+      techs: ['React Native', 'Laravel', 'Ionic', 'MySQL', 'FinPay'],
     },
     {
       id: 4,
-      pic: require('../../assets/projects/empty.png'),
+      pic: require('../../assets/projects/3.jpg'),
       name: 'Deli Sales Portal',
-      caption: 'ReSH Smart Home',
-      desc: 'blah blablbah blah blablbah blah blablbah blah blablbah ',
-      techs: ['jQuery', 'PHP', 'MySQL'],
+      caption: 'Order portal WebApp for salesman',
+      desc:
+        'Web app order portal for salesmen. order input, product and stock information, customer registration with digital sign and device GPS Location',
+      credit: 'PT. Deli Group Indonesia',
+      techs: ['jQuery', 'Codeigniter', 'MySQL'],
     },
   ];
   const {colors} = useTheme();
@@ -56,7 +63,8 @@ const ResumePortfolios = () => {
       </Text>
       <Caption style={{color: colors.white}}>
         I've created some demo app, feel free to visit my Google Play Store
-        page. Or you can check some of my real project bellow instead :)
+        page. Or you can check the top {projects.length} of my real project
+        bellow instead :)
       </Caption>
       <FlatList
         data={projects}
@@ -76,6 +84,7 @@ const ResumePortfolios = () => {
                   resizeMode="cover"
                   style={{
                     height: content.width / 2 - 8,
+                    backgroundColor: colors.white,
                     aspectRatio: 1 / 1,
                     borderRadius: 10,
                   }}
@@ -92,10 +101,10 @@ const ResumePortfolios = () => {
                   padding: 6,
                   borderBottomLeftRadius: 10,
                   borderBottomRightRadius: 10,
-                  backgroundColor: 'rgba(0,0,0,0.3)',
+                  backgroundColor: 'rgba(0,0,0,0.6)',
                 }}>
                 <SharedElement id={`project${item.id}title`}>
-                  <Text style={{fontSize: 11}} numberOfLines={1}>
+                  <Text style={{fontSize: 11, color: '#fff'}} numberOfLines={1}>
                     {item.name}
                   </Text>
                 </SharedElement>
