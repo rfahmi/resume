@@ -32,22 +32,26 @@ const Chat = ({route, navigation}) => {
             return {...message, createdAt: message.createdAt.toDate()};
           })
           .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+        //NOTIFIKASI
+        const new_msg = messagesFirestore.slice(-1)[0];
+        if (
+          new_msg.text !==
+            'Hi there, please tell me how I can help you today. I will connect in a second' &&
+          new_msg.user._id !== chat._id
+        ) {
+          PushNotification.localNotification({
+            channelId: 'ch1',
+            title: new_msg.user.name,
+            message: new_msg.text,
+          });
+        }
         appendMessages(messagesFirestore);
       });
     return () => unsubscribe();
   }, []);
 
   const appendMessages = useCallback((msg) => {
-    // msg.forEach((doc) => {
-    //   const data = doc;
-    //   PushNotification.localNotification({
-    //     channelId: 'ch1',
-    //     title: data.user.name, // (optional)
-    //     message: data.text, // (required)
-    //   });
-    //   console.log('INI DATA: ', data.text);
-    // });
-    // console.log(msg);
     setMessages((previousMessages) => GiftedChat.append(previousMessages, msg));
   }, []);
 
@@ -85,7 +89,7 @@ const Chat = ({route, navigation}) => {
           )
         }
       />
-      {!host && (
+      {/* {!host && (
         <LinearGradient
           start={{x: 0.0, y: 1.0}}
           end={{x: 2.0, y: 0.0}}
@@ -95,7 +99,7 @@ const Chat = ({route, navigation}) => {
             Direct Connected with Fahmi Rizalul
           </Text>
         </LinearGradient>
-      )}
+      )} */}
       <GiftedChat
         messages={messages}
         user={host ? hostUser : chat}

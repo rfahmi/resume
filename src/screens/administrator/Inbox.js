@@ -5,7 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, Image, Text, View} from 'react-native';
 import {Button, Divider, List} from 'react-native-paper';
 import {RNToasty} from 'react-native-toasty';
-import HeaderBack from '../../components/HeaderBack';
+import HeaderBackTranparent from '../../components/HeaderBackTransparent';
 import {useTheme} from '../../utils/ThemeProvider';
 
 const chatsRef = firestore().collection('chats');
@@ -71,7 +71,7 @@ const Inbox = ({navigation}) => {
   if (loading) {
     return (
       <>
-        <HeaderBack title="Administrator" />
+        <HeaderBackTranparent />
         <View
           style={{
             flex: 1,
@@ -96,7 +96,7 @@ const Inbox = ({navigation}) => {
     <>
       {user ? (
         <>
-          <HeaderBack title="Chats" />
+          <HeaderBackTranparent title="Chats" />
           <FlatList
             data={rooms}
             style={{backgroundColor: colors.dim}}
@@ -156,7 +156,7 @@ const Inbox = ({navigation}) => {
             backgroundColor: colors.danger,
             justifyContent: 'center',
           }}>
-          <HeaderBack title="Chats" transparent />
+          <HeaderBackTranparent title="Chats" transparent />
           <View
             style={{
               flex: 1,

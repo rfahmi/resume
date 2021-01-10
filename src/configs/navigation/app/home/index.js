@@ -1,15 +1,38 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 import Home from '../../../../screens/home';
-const Stack = createStackNavigator();
+import Portfolio from '../../../../screens/home/Portfolio';
+
+const Stack = createSharedElementStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      headerMode="none"
+      screenOptions={{
+        useNativeDriver: true,
+        gestureEnabled: false,
+        cardStyleInterpolator: ({current: {progress}}) => {
+          return {cardStyle: {opacity: progress}};
+        },
+      }}>
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{headerShown: false}}
+        name="Portfolio"
+        component={Portfolio}
+        sharedElementsConfig={(route) => {
+          const {data} = route.params;
+          return [
+            {
+              id: `project${data.id}image`,
+              animation: 'fade',
+            },
+            {
+              id: `project${data.id}title`,
+              animation: 'fade',
+            },
+          ];
+        }}
       />
     </Stack.Navigator>
   );

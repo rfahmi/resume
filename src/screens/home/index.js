@@ -90,7 +90,7 @@ const Home = ({navigation}) => {
         <Animated.FlatList
           style={{
             paddingHorizontal: 16,
-            marginBottom: 24,
+            marginBottom: 100,
           }}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: scroll}}}],
@@ -104,7 +104,7 @@ const Home = ({navigation}) => {
             <>
               <TouchThroughView
                 style={{
-                  height: Dimensions.get('window').height * 0.4,
+                  height: Dimensions.get('window').height * 0.45,
                 }}
               />
               <Animated.View
@@ -118,18 +118,6 @@ const Home = ({navigation}) => {
                 <Icon name="chevron-up" size={36} color={colors.textSmooth} />
               </Animated.View>
             </>
-          )}
-          ListFooterComponent={() => (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingVertical: 32,
-                paddingHorizontal: 24,
-              }}>
-              <Text style={{color: colors.text}}>That's all</Text>
-            </View>
           )}
           removeClippedSubviews
           initialNumToRender={1}

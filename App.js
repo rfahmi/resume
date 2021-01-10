@@ -1,12 +1,16 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from '@react-navigation/native';
 import React from 'react';
 import {AppearanceProvider} from 'react-native-appearance';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import PushNotification from 'react-native-push-notification';
 import RootStack from './src/configs/navigation';
-import {ThemeProvider} from './src/utils/ThemeProvider';
+import {ThemeProvider, useTheme} from './src/utils/ThemeProvider';
 
 PushNotification.configure({
   // (optional) Called when Token is generated (iOS and Android)
@@ -59,23 +63,24 @@ PushNotification.configure({
   requestPermissions: true,
 });
 
-// PushNotification.channelExists('ch1', function (exists) {
-//   if (!exists) {
-//     PushNotification.createChannel(
-//       {
-//         channelId: 'ch1', // (required)
-//         channelName: 'General', // (required)
-//         channelDescription: 'General Notification', // (optional) default: undefined.
-//         soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
-//         importance: 4, // (optional) default: 4. Int value of the Android notification importance
-//         vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-//       },
-//       (created) => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
-//     );
-//   }
-// });
+PushNotification.channelExists('ch1', function (exists) {
+  if (!exists) {
+    PushNotification.createChannel(
+      {
+        channelId: 'ch1', // (required)
+        channelName: 'General', // (required)
+        channelDescription: 'General Notification', // (optional) default: undefined.
+        soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+        importance: 4, // (optional) default: 4. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+      },
+      (created) => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+    );
+  }
+});
 
 const App = () => {
+  const {isDark} = useTheme();
   const theme = {
     ...DefaultTheme,
     colors: {
@@ -88,7 +93,8 @@ const App = () => {
     <AppearanceProvider>
       <ThemeProvider>
         <PaperProvider theme={theme}>
-          <NavigationContainer>
+          <NavigationContainer
+            theme={isDark ? NavigationDarkTheme : NavigationDefaultTheme}>
             <RootStack />
           </NavigationContainer>
         </PaperProvider>
