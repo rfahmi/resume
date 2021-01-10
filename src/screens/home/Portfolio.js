@@ -116,6 +116,7 @@ const Portfolio = ({route}) => {
           <View
             style={{
               marginVertical: 16,
+              flexWrap: 'wrap',
               alignItems: 'flex-start',
               flexDirection: 'row',
             }}>

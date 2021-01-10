@@ -35,10 +35,10 @@ const SocialLinks = () => {
         color={colors.textSmooth}
         size={28}
         onPress={() =>
-          Linking.canOpenURL('market://details?id=com.rfahmi.resume').then(
+          Linking.canOpenURL('market://dev?id=7004536299726654394').then(
             (a) => {
               if (a) {
-                Linking.openURL('market://details?id=com.rfahmi.resume');
+                Linking.openURL('market://dev?id=7004536299726654394');
               } else {
                 ToastAndroid.show(
                   'Oopps! Cannot found store app',
