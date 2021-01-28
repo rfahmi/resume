@@ -2,8 +2,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import {useNavigation} from '@react-navigation/native';
 import React, {memo, useEffect, useState} from 'react';
-import {ActivityIndicator, Dimensions, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  StatusBar,
+  Text,
+  View,
+} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 import Header from '../../components/Header';
 import {uniqueID} from '../../utils/Generator';
 import {useTheme} from '../../utils/ThemeProvider';
@@ -11,7 +18,7 @@ import {useTheme} from '../../utils/ThemeProvider';
 const chatsRef = firestore().collection('chats');
 
 const Auth = () => {
-  const {colors} = useTheme();
+  const {colors, isDark} = useTheme();
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(true);
@@ -63,6 +70,11 @@ const Auth = () => {
 
   return (
     <>
+      <FocusAwareStatusBar
+        barStyle={isDark ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.background}
+        translucent={false}
+      />
       <Header title="Authentication" />
       <View
         style={{

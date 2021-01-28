@@ -4,12 +4,13 @@ import {Animated, Dimensions, StatusBar, View} from 'react-native';
 import TouchableScale from 'react-native-touchable-scale';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const HeaderBackTransparent = ({headerOpacity}) => {
+const HeaderBackTransparent = ({headerOpacity, translucent}) => {
   const navigation = useNavigation();
   const _goBack = () => navigation.goBack();
   return (
     <Animated.View
       style={{
+        marginTop: translucent ? StatusBar.currentHeight : 0,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

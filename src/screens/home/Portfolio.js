@@ -1,30 +1,35 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, Dimensions, StatusBar, View} from 'react-native';
+import {Animated, Dimensions, View} from 'react-native';
 import {Caption, Chip, Paragraph} from 'react-native-paper';
 import {SharedElement} from 'react-navigation-shared-element';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 import HeaderBackTransparent from '../../components/HeaderBackTransparent';
 import {useTheme} from '../../utils/ThemeProvider';
 
 const Portfolio = ({route}) => {
   const {data} = route.params;
   const scroll = useRef(new Animated.Value(0)).current;
-  const cardPosition = useRef(new Animated.Value(0)).current;
-  const {colors} = useTheme();
+  const cardPosition = useRef(new Animated.Value(-150)).current;
+  const {colors, isDark} = useTheme();
   const WINDOW_HEIGHT = Dimensions.get('window').height;
   const WINDOW_WIDTH = Dimensions.get('window').width;
 
   useEffect(() => {
     Animated.timing(cardPosition, {
       toValue: 100,
-      duration: 400,
-      delay: 400,
+      duration: 600,
+      // delay: 400,
       useNativeDriver: true,
     }).start();
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: colors.background}}>
-      <StatusBar barStyle="dark-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderBackTransparent />
+      <FocusAwareStatusBar
+        translucent
+        barStyle="light-content"
+        backgroundColor="rgba(0,0,0,0.2)"
+      />
+      <HeaderBackTransparent translucent />
       <View collapsable={false}>
         <SharedElement
           id={`project${data.id}image`}
@@ -130,7 +135,7 @@ const Portfolio = ({route}) => {
             {data.desc}
           </Paragraph>
           <Caption style={{color: colors.text, marginTop: 50}}>
-            {'\u00a9'} Credit to: {data.credit}
+            {'\u00a9'} Copyright: {data.credit}
           </Caption>
         </Animated.View>
       </Animated.ScrollView>

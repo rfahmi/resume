@@ -1,17 +1,16 @@
 import firestore from '@react-native-firebase/firestore';
-import React, {useCallback, useEffect, useState, memo} from 'react';
-import {Text} from 'react-native';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import {Bubble, GiftedChat, InputToolbar} from 'react-native-gifted-chat';
-import LinearGradient from 'react-native-linear-gradient';
 import {Appbar, Menu} from 'react-native-paper';
 import PushNotification from 'react-native-push-notification';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 import HeaderBack from '../../components/HeaderBack';
 import {useTheme} from '../../utils/ThemeProvider';
 const chatsRef = firestore().collection('chats');
 
 const Chat = ({route, navigation}) => {
   const {chat, host} = route.params;
-  const {colors} = useTheme();
+  const {colors, isDark} = useTheme();
   const [messages, setMessages] = useState([]);
   const [menu, setMenu] = useState(false);
   const hostUser = {
@@ -70,6 +69,11 @@ const Chat = ({route, navigation}) => {
 
   return (
     <>
+      <FocusAwareStatusBar
+        barStyle={isDark ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.background}
+        translucent={false}
+      />
       <HeaderBack
         title="Live Chat"
         right={

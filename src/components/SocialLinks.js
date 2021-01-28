@@ -35,22 +35,25 @@ const SocialLinks = () => {
         color={colors.textSmooth}
         size={28}
         onPress={() =>
-          Linking.canOpenURL('market://dev?id=7004536299726654394').then(
-            (a) => {
-              if (a) {
-                Linking.openURL('market://dev?id=7004536299726654394');
-              } else {
-                ToastAndroid.show(
-                  'Oopps! Cannot found store app',
-                  ToastAndroid.SHORT,
-                );
-              }
-            },
-          )
+          Linking.canOpenURL(
+            'https://play.google.com/store/apps/dev?id=7004536299726654394',
+          ).then((a) => {
+            if (a) {
+              Linking.openURL(
+                'https://play.google.com/store/apps/dev?id=7004536299726654394',
+              );
+            } else {
+              ToastAndroid.show(
+                'Oopps! Cannot found store app',
+                ToastAndroid.SHORT,
+              );
+            }
+          })
         }
       />
     </View>
   );
 };
 
+// 7004536299726654394
 export default memo(SocialLinks);

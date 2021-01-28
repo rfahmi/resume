@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Header from '../../components/Header';
 import Toggle from '../../components/Toggle';
 import ResumeAboutMe from '../../organism/resume/ResumeAboutMe';
+import ResumeEducations from '../../organism/resume/ResumeEducations';
 import ResumeExperiences from '../../organism/resume/ResumeExperiences';
 import ResumeHeadline from '../../organism/resume/ResumeHeadline';
 import ResumePortfolios from '../../organism/resume/ResumePortfolios';
@@ -22,6 +23,7 @@ const Home = ({navigation}) => {
     'ResumeAboutMe',
     'ResumeSkills',
     'ResumeExperiences',
+    'ResumeEducations',
     'ResumePortfolios',
   ];
   const _renderPanel = ({item}) => {
@@ -45,6 +47,8 @@ const Home = ({navigation}) => {
           <ResumeSkills />
         ) : item === 'ResumeExperiences' ? (
           <ResumeExperiences />
+        ) : item === 'ResumeEducations' ? (
+          <ResumeEducations />
         ) : item === 'ResumePortfolios' ? (
           <ResumePortfolios />
         ) : (
@@ -71,8 +75,10 @@ const Home = ({navigation}) => {
             />
           </View>
         }
+        translucent
       />
       <StatusBar
+        translucent
         barStyle={isDark ? 'light-content' : 'dark-content'}
         backgroundColor={colors.background}
       />
@@ -90,7 +96,7 @@ const Home = ({navigation}) => {
         <Animated.FlatList
           style={{
             paddingHorizontal: 16,
-            marginBottom: 100,
+            marginBottom: 200,
           }}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: scroll}}}],

@@ -1,8 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {memo} from 'react';
+import {StatusBar} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {useTheme} from '../utils/ThemeProvider';
-const Header = ({title, right, transparent}) => {
+const Header = ({title, right, transparent, translucent}) => {
   const navigation = useNavigation();
   const {colors} = useTheme();
   const _openDrawer = () => navigation.openDrawer();
@@ -10,6 +11,7 @@ const Header = ({title, right, transparent}) => {
   return (
     <Appbar.Header
       style={{
+        marginTop: translucent ? StatusBar.currentHeight : 0,
         backgroundColor: transparent ? 'transparent' : colors.background,
         elevation: 0,
         zIndex: 2,

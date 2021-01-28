@@ -2,11 +2,20 @@ import {GoogleSignin} from '@react-native-community/google-signin';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, Image, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  StatusBar,
+  Text,
+  View,
+} from 'react-native';
 import {Button, Divider, List} from 'react-native-paper';
 import {RNToasty} from 'react-native-toasty';
-import HeaderBackTranparent from '../../components/HeaderBackTransparent';
+import HeaderBackTransparent from '../../components/HeaderBackTransparent';
+import HeaderBack from '../../components/HeaderBack';
 import {useTheme} from '../../utils/ThemeProvider';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 
 const chatsRef = firestore().collection('chats');
 const Inbox = ({navigation}) => {
@@ -71,7 +80,7 @@ const Inbox = ({navigation}) => {
   if (loading) {
     return (
       <>
-        <HeaderBackTranparent />
+        <HeaderBackTransparent translucent />
         <View
           style={{
             flex: 1,
@@ -96,7 +105,12 @@ const Inbox = ({navigation}) => {
     <>
       {user ? (
         <>
-          <HeaderBackTranparent title="Chats" />
+          <FocusAwareStatusBar
+            barStyle={isDark ? 'light-content' : 'dark-content'}
+            backgroundColor={colors.background}
+            translucent={false}
+          />
+          <HeaderBack title="Chats" />
           <FlatList
             data={rooms}
             style={{backgroundColor: colors.dim}}
@@ -156,7 +170,12 @@ const Inbox = ({navigation}) => {
             backgroundColor: colors.danger,
             justifyContent: 'center',
           }}>
-          <HeaderBackTranparent title="Chats" transparent />
+          <StatusBar
+            translucent
+            barStyle="light-content"
+            backgroundColor="transparent"
+          />
+          <HeaderBackTransparent title="Chats" transparent translucent />
           <View
             style={{
               flex: 1,
